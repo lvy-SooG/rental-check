@@ -37,11 +37,11 @@ import {
   removePhoto,
   saveInspection,
   updateInspectionPhase,
-  setMoveOutDate,
+  setMoveOutDate as setInspectionMoveOutDate,
 } from "@/lib/inspection-store";
 import { ROOM_CATEGORIES, type InspectionPhase } from "@/lib/types";
 import type { Inspection, Room, RoomPhoto, AiAnalysisResult } from "@/lib/types";
-import { formatDate, getConditionColor } from "@/lib/utils";
+import { cn, formatDate, getConditionColor } from "@/lib/utils";
 import { toast } from "sonner";
 import { InspectionPDF } from "@/components/InspectionPDF";
 import { pdf } from "@react-pdf/renderer";
@@ -257,7 +257,7 @@ export default function InspectionDetailPage() {
   const handleMoveOutDateChange = (date: string) => {
     setMoveOutDate(date);
     if (inspection) {
-      setMoveOutDate(inspection.id, date);
+      setInspectionMoveOutDate(inspection.id, date);
     }
   };
 
@@ -399,7 +399,7 @@ export default function InspectionDetailPage() {
             </p>
           </div>
         </CardContent>
-      </div>
+      </Card>
 
       <Tabs defaultValue="photos" className="mb-6">
         <TabsList className="grid w-full grid-cols-2">
