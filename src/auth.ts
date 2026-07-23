@@ -2,14 +2,9 @@ import NextAuth from "next-auth";
 import Google from "next-auth/providers/google";
 import Apple from "next-auth/providers/apple";
 
-// 确保 secret 一定有值，避免 MissingSecret 错误
-const AUTH_SECRET =
-  process.env.AUTH_SECRET ||
-  process.env.NEXTAUTH_SECRET ||
-  "rental-check-fallback-secret-9f8e7d6c5b4a3928f1e0d1c2b3a49586";
-
+// 临时硬编码 secret 用于测试部署是否生效
 export const { handlers, signIn, signOut, auth } = NextAuth({
-  secret: AUTH_SECRET,
+  secret: "hardcoded-test-secret-1234567890abcdef",
   trustHost: true,
   providers: [
     Google({
