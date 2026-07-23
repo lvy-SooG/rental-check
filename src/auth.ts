@@ -2,11 +2,14 @@ import NextAuth from "next-auth";
 import Google from "next-auth/providers/google";
 import Apple from "next-auth/providers/apple";
 
+process.env.AUTH_SECRET =
+  process.env.AUTH_SECRET ||
+  process.env.NEXTAUTH_SECRET ||
+  "rental-check-dev-secret-change-in-production";
+
 export const { handlers, signIn, signOut, auth } = NextAuth({
-  secret:
-    process.env.AUTH_SECRET ||
-    process.env.NEXTAUTH_SECRET ||
-    "rental-check-dev-secret-change-in-production",
+  secret: process.env.AUTH_SECRET as string,
+  trustHost: true,
   providers: [
     Google({
       clientId: process.env.AUTH_GOOGLE_ID,
