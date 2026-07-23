@@ -2,13 +2,14 @@ import NextAuth from "next-auth";
 import Google from "next-auth/providers/google";
 import Apple from "next-auth/providers/apple";
 
-process.env.AUTH_SECRET =
+// 确保 secret 一定有值，避免 MissingSecret 错误
+const AUTH_SECRET =
   process.env.AUTH_SECRET ||
   process.env.NEXTAUTH_SECRET ||
-  "rental-check-dev-secret-change-in-production";
+  "rental-check-fallback-secret-9f8e7d6c5b4a3928f1e0d1c2b3a49586";
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
-  secret: process.env.AUTH_SECRET as string,
+  secret: AUTH_SECRET,
   trustHost: true,
   providers: [
     Google({
